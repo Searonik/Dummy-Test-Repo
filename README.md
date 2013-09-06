@@ -1,4 +1,4 @@
 Dummy-Test-Repo
 ===============
 
-A repo for testing
+A repo for testing.
