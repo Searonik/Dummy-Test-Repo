@@ -67,36 +67,38 @@ public class OptionsMenu : MonoBehaviour {
 				Screen.SetResolution((int) setRes.x, (int) setRes.y, false);	
 			}
 			
-			//Master Volume slider and toggle
+			//Master Volume slider
 			master = GUI.HorizontalSlider(new Rect(Screen.width * .5f, Screen.height * .39f, Screen.width * .4f, Screen.height * .04f), master, 0f, 1f);
-			
-			//convert the slider value to a string and truncate it to a maximum of 5, or 3 digits right of the decimal, then display it
+			//Display the slider as a Percent
 			string masterString = (int)(master * 100) + "%";
 			GUI.Label(new Rect(Screen.width * .9f, Screen.height * .39f, Screen.width * .1f, Screen.height * .5f),  masterString);
-			//toggle mute button
+			//Master mute button
 			masterBool = GUI.Toggle(new Rect(Screen.width * .7f, Screen.height * .44f, Screen.width * .2f, Screen.height * .05f), masterBool, "Master Mute");
-			mainCameraObj.GetComponent<AudioListener>().enabled = !masterBool;
 			
 			
 			
 			//Sound Volume slider and toggle
 			sound = GUI.HorizontalSlider(new Rect(Screen.width * .5f, Screen.height * .49f, Screen.width * .4f, Screen.height * .04f), sound, 0f, 1f);
+			//apply Sound sldier to volume, modified by the master volume.
 			AudioListener.volume = sound * master;
+			//Then, display it as a percent of the slider alone
 			string soundString = (int)(sound * 100) + "%";
 			GUI.Label(new Rect(Screen.width * .9f, Screen.height * .49f, Screen.width * .1f, Screen.height * .5f), soundString);
-			//toggle sound button
+			//mute sound button, applied in conjunction with the master mute
 			soundBool = GUI.Toggle(new Rect(Screen.width * .7f, Screen.height * .54f, Screen.width * .2f, Screen.height * .05f), soundBool, "Sound Mute");
-			AudioListener.pause = soundBool;
+			AudioListener.pause = soundBool || masterBool;
 			
 			
 			//Music Volume slider and toggle
 			music = GUI.HorizontalSlider(new Rect(Screen.width * .5f, Screen.height * .59f, Screen.width * .4f, Screen.height * .04f), music, 0f, 1f);
+			//apply Music volume to the music source, modified by master Volume. 
 			mainCameraObj.GetComponent<AudioSource>().volume = music * master;
+			//Then display it as a percent of the slider alone
 			string musicString = (int)(music * 100) + "%";
 			GUI.Label(new Rect(Screen.width * .9f, Screen.height * .59f, Screen.width * .1f, Screen.height * .5f), musicString);
-			//toogle music button
+			//mute music button, applied in conjuntion with the master mute
 			musicBool = GUI.Toggle(new Rect(Screen.width * .7f, Screen.height * .64f, Screen.width * .2f, Screen.height * .05f), musicBool, "Music Mute");
-			mainCameraObj.GetComponent<AudioSource>().mute = musicBool;
+			mainCameraObj.GetComponent<AudioSource>().mute = musicBool || masterBool;
 			
 		
 			//Controls configuration button. (not yet implemented)
