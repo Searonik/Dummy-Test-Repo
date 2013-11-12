@@ -31,26 +31,35 @@ public class MainMenu : MonoBehaviour {
 		 * 
 		 * */
 		//if (!options){
-		if(GUI.Button(new Rect(Screen.width * .1f, Screen.height * .05f, Screen.width * .2f, Screen.height * .07f), "Continue game")){
+		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .05f, Screen.width * .2f, Screen.height * .07f), "Continue game")){
 			Debug.Log("Continue");
 		}
-		if(GUI.Button(new Rect(Screen.width * .1f, Screen.height * .16f, Screen.width * .2f, Screen.height * .07f), "New game")){
+		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .16f, Screen.width * .2f, Screen.height * .07f), "New game")){
 			Debug.Log("New game");
+			// Instant swap to player camera For testing player movement
+			GameObject.Find("PlayerCamera").camera.enabled = true;
+			GameObject.Find("Main Camera").camera.enabled = false;
+			GameObject.Find ("Main Camera").SetActive (false);
+			GameObject.Find ("PlayerCamera").SetActive (true);
+			optionsCamObj.SetActive (false);
+			optionsCamObj.camera.enabled = false;
+			Debug.Log ("Done");
+			
 		}
-		if(GUI.Button(new Rect(Screen.width * .1f, Screen.height * .27f, Screen.width * .2f, Screen.height * .07f), "Load game")){
+		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .27f, Screen.width * .2f, Screen.height * .07f), "Load game")){
 			Debug.Log("Load game");
 		}
-		if(GUI.Button(new Rect(Screen.width * .1f, Screen.height * .38f, Screen.width * .2f, Screen.height * .07f), "Options")){
+		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .38f, Screen.width * .2f, Screen.height * .07f), "Options")){
 			Debug.Log("Options");
 			//optionsCamObj = GameObject.Find("Options Camera");
 			optionsCamObj.SetActive(!optionsCamObj.activeSelf);
 			//optionsCam.GetComponent<Camera>().enabled = true;
 			//options = !options;
 		}
-		if(GUI.Button(new Rect(Screen.width * .1f, Screen.height * .49f, Screen.width * .2f, Screen.height * .07f), "About us")){
+		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .49f, Screen.width * .2f, Screen.height * .07f), "About us")){
 			Debug.Log("About us");
 		}
-		if(GUI.Button(new Rect(Screen.width * .1f, Screen.height * .6f, Screen.width * .2f, Screen.height * .07f), "Exit game")){
+		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .6f, Screen.width * .2f, Screen.height * .07f), "Exit game")){
 			Debug.Log("exit");
 			Application.Quit();
 		}
