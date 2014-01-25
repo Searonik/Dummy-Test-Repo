@@ -8,8 +8,6 @@ public class MainMenu : MonoBehaviour {
 	void awake(){
 		optionsCamObj = GameObject.Find("Options Camera");
 		optionsCamObj.SetActive(false);
-		GameObject.Find("MainCamera").GetComponent<AudioSource>().ignoreListenerVolume = true;
-		GameObject.Find("MainCamera").GetComponent<AudioSource>().ignoreListenerPause = true;
 	}
 	// Use this for initialization
 	void Start () {

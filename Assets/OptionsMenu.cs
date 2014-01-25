@@ -13,8 +13,16 @@ public class OptionsMenu : MonoBehaviour {
 	public bool musicBool = true;
 	GameObject optionsCamObj;
 	GameObject mainCameraObj;	
-	//bool options = false;
-	
+	private bool controlConfig = false;
+	private Rect windowRect = new Rect(Screen.width * .1f, Screen.height * .1f, Screen.width * .8f, Screen.height * .8f);
+	//Assign a string for the names of the buttons that are configuable
+	string [] buttonConfig = {"Rudder", "Sails", "Mouse Scroll", "Ready Port Cannons", 
+		"Ready Stoarboard Cannons", "Ready Fore Cannons", "Ready Aft Cannons", 
+		"Fire Cannons", "Launch Longboats", "Choose Target", "Menu", "Map", 
+		"Inventory", "Assign Crew", "Enter Port"};
+	int buttonInt = 0;
+
+
 	//To be used on scene loading
 	void awake () {
 	
@@ -32,7 +40,7 @@ public class OptionsMenu : MonoBehaviour {
 		masterBool = !mainCameraObj.GetComponent<AudioListener>().enabled;
 		soundBool = AudioListener.pause;
 		musicBool = mainCameraObj.GetComponent<AudioSource>().mute;
-		
+
 		
 		
 	}
@@ -99,20 +107,36 @@ public class OptionsMenu : MonoBehaviour {
 			//mute music button, applied in conjuntion with the master mute
 			musicBool = GUI.Toggle(new Rect(Screen.width * .7f, Screen.height * .64f, Screen.width * .2f, Screen.height * .05f), musicBool, "Music Mute");
 			mainCameraObj.GetComponent<AudioSource>().mute = musicBool || masterBool;
-			
-		
-			//Controls configuration button. (not yet implemented)
-			GUI.Button(new Rect(Screen.width * .65f, Screen.height * .7f, Screen.width * .3f, Screen.height * .05f), "Controls configuration");
-			
+
 			//Back to Main Menu button
 			if (GUI.Button(new Rect(Screen.width * .1f, Screen.height * .85f, Screen.width * .2f, Screen.height * .05f), "Back to Menu")){
-				//options = !options;
-				//GameObject.find("Options Camera").GetComponent<Camera>().enabled = false;
 				GameObject optionsCamObj = GameObject.Find("Options Camera");
 				optionsCamObj.SetActive(false);
-				//Camera derp = herp.GetComponent<Camera>();
-				//derp.enabled = false;
 			}
+
+			/*****
+			 * Aborted contols configuation attempt. May return if we develop our own input management. 
+			 * Hooks into the GUI via a GUI window.
+
+			//Controls configuration button.
+			if (GUI.Button(new Rect(Screen.width * .65f, Screen.height * .7f, Screen.width * .3f, Screen.height * .05f), "Controls configuration")){
+				controlConfig = !controlConfig;
+			}
+			
+
+		
+			//Controls configuration - lets players set the controls
+			if (controlConfig){
+				windowRect = GUI.Window(0, windowRect, controlsConfigWindow, "Controls Configuration");
+			}*/
+			
 	}
+
+
+	/*	aborted Configuration controls menu
+		void controlsConfigWindow(int winID){
+		buttonInt = GUI.SelectionGrid(new Rect(windowRect.width * .25f, windowRect.height * .05f, windowRect.width * .25f, windowRect.height * .9f), buttonInt, buttonConfig, 1);
+		GUI.Label(new Rect(windowRect.width * .55f, windowRect.height * .05f, windowRect.width * .25f, windowRect.height *.05), "Rudder");
+	}*/
 	
 }
