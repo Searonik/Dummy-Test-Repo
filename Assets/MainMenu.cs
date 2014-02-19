@@ -4,14 +4,14 @@ using System.Collections;
 public class MainMenu : MonoBehaviour {
 
 	public GameObject optionsCamObj;
+	public GameObject playerShipObj;
 	
 	void awake(){
-		optionsCamObj = GameObject.Find("Options Camera");
 		optionsCamObj.SetActive(false);
+		playerShipObj.SetActive(false);
 	}
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -35,12 +35,10 @@ public class MainMenu : MonoBehaviour {
 		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .16f, Screen.width * .2f, Screen.height * .07f), "New game")){
 			Debug.Log("New game");
 			// Instant swap to player camera For testing player movement
-			GameObject.Find("PlayerCamera").camera.enabled = true;
-			GameObject.Find("Main Camera").camera.enabled = false;
-			GameObject.Find ("Main Camera").SetActive (false);
-			GameObject.Find ("PlayerCamera").SetActive (true);
+			playerShipObj.SetActive(true);
 			optionsCamObj.SetActive (false);
-			optionsCamObj.camera.enabled = false;
+			GameObject.Find("Main Camera").SetActive(false);
+			//optionsCamObj.camera.enabled = false;
 			Debug.Log ("Done");
 			
 		}

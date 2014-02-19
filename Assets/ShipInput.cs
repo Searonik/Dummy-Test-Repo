@@ -4,6 +4,11 @@ using System.Collections;
 public class ShipInput : MonoBehaviour {
 
 	float inertia;
+	public GameObject mainCameraObj;
+
+	void awake(){
+	}
+
 	// Use this for initialization
 	void Start () {
 		inertia = 0;
@@ -15,5 +20,10 @@ public class ShipInput : MonoBehaviour {
 		inertia = Mathf.Lerp(inertia, Input.GetAxis("Sails"), Time.deltaTime);
 		transform.Rotate(Vector3.up * Input.GetAxis("Rudder"));
 		transform.Translate(Vector3.forward * inertia * Time.deltaTime);
+		if (Input.GetButton("Menu")){
+			mainCameraObj.SetActive(true);
+			GameObject.Find ("galleon").SetActive(false);
+		}
+
 	}
 }

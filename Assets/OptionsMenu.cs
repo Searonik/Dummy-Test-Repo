@@ -5,9 +5,9 @@ public class OptionsMenu : MonoBehaviour {
 	
 	Vector2 resVector = Vector2.zero;
 	Vector2 setRes;
-	public float master = 0f;
-	public float sound = 0f;
-	public float music = 0f;
+	public float master = 1f;
+	public float sound = 1f;
+	public float music = 1f;
 	public bool masterBool = true;
 	public bool soundBool = true;
 	public bool musicBool = true;
@@ -33,10 +33,8 @@ public class OptionsMenu : MonoBehaviour {
 		optionsCamObj = GameObject.Find("Options Camera");
 		optionsCamObj.GetComponent<AudioListener>().enabled = false;
 		mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
-		master = 1;
 		sound = AudioListener.volume / master;
 		music = mainCameraObj.GetComponent<AudioSource>().volume / master;
-		optionsCamObj.SetActive(false);
 		masterBool = !mainCameraObj.GetComponent<AudioListener>().enabled;
 		soundBool = AudioListener.pause;
 		musicBool = mainCameraObj.GetComponent<AudioSource>().mute;
