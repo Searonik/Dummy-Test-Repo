@@ -30,9 +30,8 @@ public class OptionsMenu : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		optionsCamObj = GameObject.Find("Options Camera");
-		optionsCamObj.GetComponent<AudioListener>().enabled = false;
-		mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
+		optionsCamObj = GameObject.Find("Options Object");
+		mainCameraObj = GameObject.FindGameObjectWithTag("Main Camera");
 		sound = AudioListener.volume / master;
 		music = mainCameraObj.GetComponent<AudioSource>().volume / master;
 		masterBool = !mainCameraObj.GetComponent<AudioListener>().enabled;
