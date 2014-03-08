@@ -25,5 +25,6 @@ public class ShipInput : MonoBehaviour {
 			GameObject.Find ("galleon").SetActive(false);
 		}
 
+
 	}
 }
