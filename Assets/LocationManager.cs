@@ -30,6 +30,10 @@ public class LocationManager : MonoBehaviour {
 	}
 
 	private bool BeyondDistance(GameObject thing){
+		/* This is the pythagorean theroem. 
+		 * Position is thankfully the center, so we just crunch.
+		 * Also, to save on math processing, we compare vs distance squared.
+		 */
 
 		if ((Mathf.Pow((thing.transform.position.x - this.transform.position.x), 2f) + Mathf.Pow((thing.transform.position.z - this.transform.position.z), 2f)) > 250000){
 				return true;

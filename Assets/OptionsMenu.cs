@@ -30,8 +30,14 @@ public class OptionsMenu : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		/* This seciton here sets up camera data
+		 * Current methods find both the main camera, and the obejcts object itself
+		 * The options object was once a camera, but this has changed.
+		 * it also determines the proper slider values based on volume and itnern data levels
+		 * See below for more into about each value
+		 */
 		optionsCamObj = GameObject.Find("Options Object");
-		mainCameraObj = GameObject.FindGameObjectWithTag("Main Camera");
+		mainCameraObj = GameObject.FindGameObjectWithTag("MainCamera");
 		sound = AudioListener.volume / master;
 		music = mainCameraObj.GetComponent<AudioSource>().volume / master;
 		masterBool = !mainCameraObj.GetComponent<AudioListener>().enabled;
@@ -51,8 +57,16 @@ public class OptionsMenu : MonoBehaviour {
 		//Grab accurate screen resolution before running.
 		setRes.x = Screen.width;
 		setRes.y = Screen.height;
-		
-		//Resolution choice box. need a lot of work
+
+		/*Note : all GUI objects on this area use a % of the screen, denote by .XXf
+		 * So .02f is 2% of screen, .1f is 10% of the screen, etc.
+		 * This makes for long lines, but if you need ot move stuff aorund, 
+		 * The format is (X position, Y position, width, height) for each rect.
+		 * Rects are needed by OnGUI, so just edit the constants to move stuff around.
+		 * We can work on code eloquence later - this if efficent.
+		 */
+
+		//Resolution choice box. need a lot of Polish, but functions
 			GUI.Label(new Rect(Screen.width * .7f, Screen.height * .05f, Screen.width * .2f, Screen.height * .05f), "Resolution");
 			
 			resVector = GUI.BeginScrollView(new Rect(Screen.width * .6f, Screen.height * .11f, Screen.width * .2f, Screen.height * .15f) , resVector, new Rect(0, 0, Screen.width * .2f, Screen.width * .15f));

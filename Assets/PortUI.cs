@@ -36,6 +36,8 @@ public class PortUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Causes the port to display. The port Object is an image. 
+		// Showport tracks if the port is open or not
 		if (Input.GetButtonDown("Port")){
 			PortObject.SetActive(!PortObject.activeSelf);
 			ShowPort = PortObject.activeSelf;
@@ -47,6 +49,12 @@ public class PortUI : MonoBehaviour {
 
 	void OnGUI(){
 		if (ShowPort){
+			/* shows 5 buttons, each button being one of the 5 places you can go in port
+			 * Each button uses a Rect that takes up a % of the scrren, int he .xxf format
+			 * So .-2f is 2%, 1f is 10%, etc. 
+			 * The use of rects is a requirement of the GUI Buttons.
+			 * This is the simple, if less easy to maintain version.
+			 */
 			if (GUI.Button(new Rect(Screen.width * .1f, Screen.height * .3f, Screen.width * .1f, Screen.height * .1f), Shipyard)){
 				PortWindow = 0;
 			}
@@ -63,6 +71,11 @@ public class PortUI : MonoBehaviour {
 				PortWindow = 4;
 			}
 		
+		/* Here, if a button has been pressed, we track it. 
+		 * It invokes the Gui Window function for each place in port.
+		 * If you don't know what that is, I suggest you read up on
+		 * the Unity.GUI tutorials, it's a little wonky.
+		 */
 		switch (PortWindow){
 			case 0:
 				ShipWindow = GUI.Window(1, ShipWindow, DisplayShipyard, "Shipyard");
@@ -84,6 +97,8 @@ public class PortUI : MonoBehaviour {
 		
 	}
 
+	// Display functions for each Port element.
+	// Each one also invokes a common toolbar, meant to emulate tabs
 	void DisplayShipyard(int ID){
 		PortTabs(ShipWindow);
 	}
@@ -104,6 +119,9 @@ public class PortUI : MonoBehaviour {
 		PortTabs(DockWindow);
 	}
 
+	/* This is the common function that displays the quick-selection
+	 * toolbar for going between places in port - like tabs in a window.
+	 */
 	void PortTabs(Rect window){
 		Debug.Log(window);
 		PortWindow = GUI.Toolbar(new Rect(window.x, window.y + window.height * .1f, window.width * .8f, window.height * .1f), PortWindow, WindowNames);

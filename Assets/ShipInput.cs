@@ -16,8 +16,9 @@ public class ShipInput : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//transform.Rotate(new Vector3(0, 0,  Time.deltaTime * -3f * (Mathf.PI * Input.GetAxis("Rudder"))));
+		// Makes the ship turn based on the "Rudder" Axis
 		transform.Rotate(Vector3.up * Input.GetAxis("Rudder") * .2f);
+		// Return to main menu upon hitting menu button - a temporary method
 		if (Input.GetButton("Menu")){
 			mainCameraObj.SetActive(true);
 			GameObject.Find ("galleon").SetActive(false);
