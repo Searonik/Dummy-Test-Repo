@@ -7,11 +7,11 @@ public class MainMenu : MonoBehaviour {
 	public GameObject playerShipObj;
 
 	// Button rectangle variables - right side
-	private const float LEFT_ALIGN = Screen.width * .75f;
-	private const float BUTTON_WIDTH = Screen.width * .2f;
-	private const float TOP_ALIGN = Screen.height * .05f;
-	private const float BUTTON_HEIGHT = Screen.height * .07f;
-	private const float BUTTON_VERTICAL_OFFSET = Screen.height * .11f;
+	private float leftAlign = Screen.width * .75f;
+	private float buttonWidth = Screen.width * .2f;
+	private float topAlign = Screen.height * .05f;
+	private float buttonHeight = Screen.height * .07f;
+	private float buttonVerticalOffset = Screen.height * .11f;
 	private int buttonNo = 0;
 	
 	void awake(){
@@ -92,10 +92,10 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	private Rect GenerateNextLeftAlignedRectangle() {
-		return new Rect(LEFT_ALIGN,
-		                TOP_ALIGN + (buttonNo++ * BUTTON_VERTICAL_OFFSET),
-		                BUTTON_WIDTH,
-		                BUTTON_HEIGHT);
+		return new Rect(leftAlign,
+		                topAlign + (buttonNo++ * buttonVerticalOffset),
+		                buttonWidth,
+		                buttonHeight);
 	}
 	
 
