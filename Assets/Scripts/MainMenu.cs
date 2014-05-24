@@ -5,6 +5,14 @@ public class MainMenu : MonoBehaviour {
 
 	public GameObject optionsCamObj;
 	public GameObject playerShipObj;
+
+	// Button rectangle variables - right side
+	private const float LEFT_ALIGN = Screen.width * .75f;
+	private const float BUTTON_WIDTH = Screen.width * .2f;
+	private const float TOP_ALIGN = Screen.height * .05f;
+	private const float BUTTON_HEIGHT = Screen.height * .07f;
+	private const float BUTTON_VERTICAL_OFFSET = Screen.height * .11f;
+	private int buttonNo = 0;
 	
 	void awake(){
 		optionsCamObj.SetActive(false);
@@ -29,10 +37,10 @@ public class MainMenu : MonoBehaviour {
 		 * 
 		 * */
 		//if (!options){
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .05f, Screen.width * .2f, Screen.height * .07f), "Continue game")){
+		if(GUI.Button(GenerateNextLeftAlignedRectangle(), "Continue game")){
 			Debug.Log("Continue");
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .16f, Screen.width * .2f, Screen.height * .07f), "New game")){
+		if(GUI.Button(GenerateNextLeftAlignedRectangle(), "New game")){
 			Debug.Log("New game");
 			// Instant swap to player camera For testing player movement
 			playerShipObj.SetActive(true);
@@ -42,20 +50,20 @@ public class MainMenu : MonoBehaviour {
 			Debug.Log ("Done");
 			
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .27f, Screen.width * .2f, Screen.height * .07f), "Load game")){
+		if(GUI.Button(GenerateNextLeftAlignedRectangle(), "Load game")){
 			Debug.Log("Load game");
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .38f, Screen.width * .2f, Screen.height * .07f), "Options")){
+		if(GUI.Button(GenerateNextLeftAlignedRectangle(), "Options")){
 			Debug.Log("Options");
 			//optionsCamObj = GameObject.Find("Options Camera");
 			optionsCamObj.SetActive(!optionsCamObj.activeSelf);
 			//optionsCam.GetComponent<Camera>().enabled = true;
 			//options = !options;
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .49f, Screen.width * .2f, Screen.height * .07f), "About us")){
+		if(GUI.Button(GenerateNextLeftAlignedRectangle(), "About us")){
 			Debug.Log("About us");
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .6f, Screen.width * .2f, Screen.height * .07f), "Exit game")){
+		if(GUI.Button(GenerateNextLeftAlignedRectangle(), "Exit game")){
 			Debug.Log("exit");
 			Application.Quit();
 		}
@@ -81,6 +89,13 @@ public class MainMenu : MonoBehaviour {
 			
 			
 		//}
+	}
+
+	private Rect GenerateNextLeftAlignedRectangle() {
+		return new Rect(LEFT_ALIGN,
+		                TOP_ALIGN + (buttonNo++ * BUTTON_VERTICAL_OFFSET),
+		                BUTTON_WIDTH,
+		                BUTTON_HEIGHT);
 	}
 	
 
