@@ -16,13 +16,21 @@ public class OptionsMenu : MonoBehaviour {
 	private bool controlConfig = false;
 	private Rect windowRect = new Rect(Screen.width * .1f, Screen.height * .1f, Screen.width * .8f, Screen.height * .8f);
 	//Assign a string for the names of the buttons that are configuable
-	string [] buttonConfig = {"Rudder", "Sails", "Mouse Scroll", "Ready Port Cannons", 
-		"Ready Stoarboard Cannons", "Ready Fore Cannons", "Ready Aft Cannons", 
-		"Fire Cannons", "Launch Longboats", "Choose Target", "Menu", "Map", 
-		"Inventory", "Assign Crew", "Enter Port"};
-	int buttonInt = 0;
 
-
+	Rect resolutionLabel;
+	Rect resolutionWindow;
+	Rect resolutionVeiw;
+	Rect resolutionApply;
+	Rect masterVolume;
+	Rect masterVolumeDisplay;
+	Rect masterVolumeMute;
+	Rect soundVolume;
+	Rect soundVolumeDisplay;
+	Rect soundVolumeMute;
+	Rect musicVolume;
+	Rect musicVolumeDisplay;
+	Rect musicVolumeMute;
+	Rect returnToMainMenu;
 	//To be used on scene loading
 	void awake () {
 	
@@ -50,7 +58,20 @@ public class OptionsMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		resolutionLabel = new Rect(Screen.width * .7f, Screen.height * .05f, Screen.width * .2f, Screen.height * .05f);
+		resolutionWindow = new Rect(Screen.width * .6f, Screen.height * .11f, Screen.width * .2f, Screen.height * .15f);
+		resolutionVeiw = new Rect(0, 0, Screen.width * .2f, Screen.width * .15f);
+		resolutionApply = new Rect(Screen.width *.67f, Screen.height * .32f, Screen.width * .25f, Screen.height * .05f);
+		masterVolume = new Rect(Screen.width * .5f, Screen.height * .39f, Screen.width * .4f, Screen.height * .04f);
+		masterVolumeDisplay = new Rect(Screen.width * .9f, Screen.height * .39f, Screen.width * .1f, Screen.height * .5f);
+		masterVolumeMute = new Rect(Screen.width * .7f, Screen.height * .44f, Screen.width * .2f, Screen.height * .05f);
+		soundVolume = new Rect(Screen.width * .5f, Screen.height * .49f, Screen.width * .4f, Screen.height * .04f);
+		soundVolumeDisplay = new Rect(Screen.width * .9f, Screen.height * .49f, Screen.width * .1f, Screen.height * .5f);
+		soundVolumeMute = new Rect(Screen.width * .7f, Screen.height * .54f, Screen.width * .2f, Screen.height * .05f);
+		musicVolume = new Rect(Screen.width * .5f, Screen.height * .59f, Screen.width * .4f, Screen.height * .04f);
+		musicVolumeDisplay = new Rect(Screen.width * .9f, Screen.height * .59f, Screen.width * .1f, Screen.height * .5f);
+		musicVolumeMute = new Rect(Screen.width * .7f, Screen.height * .64f, Screen.width * .2f, Screen.height * .05f);
+		returnToMainMenu = new Rect(Screen.width * .1f, Screen.height * .85f, Screen.width * .2f, Screen.height * .05f);
 	}
 	void OnGUI(){
 		
@@ -63,13 +84,15 @@ public class OptionsMenu : MonoBehaviour {
 		 * This makes for long lines, but if you need ot move stuff aorund, 
 		 * The format is (X position, Y position, width, height) for each rect.
 		 * Rects are needed by OnGUI, so just edit the constants to move stuff around.
-		 * We can work on code eloquence later - this if efficent.
+		 * We can work on code eloquence later - this is efficent for prototyping.
 		 */
 
 		//Resolution choice box. need a lot of Polish, but functions
-			GUI.Label(new Rect(Screen.width * .7f, Screen.height * .05f, Screen.width * .2f, Screen.height * .05f), "Resolution");
+			GUI.Label(resolutionLabel, "Resolution");
 			
-			resVector = GUI.BeginScrollView(new Rect(Screen.width * .6f, Screen.height * .11f, Screen.width * .2f, Screen.height * .15f) , resVector, new Rect(0, 0, Screen.width * .2f, Screen.width * .15f));
+			resVector = GUI.BeginScrollView(resolutionWindow , resVector, resolutionVeiw);
+
+			//ToDo : Populate the resolution list with a reasonable selection of resolutions. then clean up this section
 			if (GUI.Button(new Rect(0,0, Screen.width * .15f, Screen.height * .05f), "640x480")){
 				setRes = new Vector2(640f, 480f);	
 			}
@@ -80,36 +103,38 @@ public class OptionsMenu : MonoBehaviour {
 				setRes = new Vector2(1024f, 768f);
 			}
 			GUI.EndScrollView();
+			//This is the endof the area needing ToDo attention
 			
 			//set resolution button
-			if (GUI.Button(new Rect(Screen.width *.67f, Screen.height * .32f, Screen.width * .25f, Screen.height * .05f), "Apply Resolution")){
+
+		if (GUI.Button(resolutionApply, "Apply Resolution")){
 				Screen.SetResolution((int) setRes.x, (int) setRes.y, false);	
 			}
 			
 			//Master Volume slider
-			master = GUI.HorizontalSlider(new Rect(Screen.width * .5f, Screen.height * .39f, Screen.width * .4f, Screen.height * .04f), master, 0f, 1f);
+			master = GUI.HorizontalSlider(masterVolume, master, 0f, 1f);
 			//Display the slider as a Percent
 			string masterString = (int)(master * 100) + "%";
-			GUI.Label(new Rect(Screen.width * .9f, Screen.height * .39f, Screen.width * .1f, Screen.height * .5f),  masterString);
+			GUI.Label(masterVolumeDisplay,  masterString);
 			//Master mute button
-			masterBool = GUI.Toggle(new Rect(Screen.width * .7f, Screen.height * .44f, Screen.width * .2f, Screen.height * .05f), masterBool, "Master Mute");
+			masterBool = GUI.Toggle(masterVolumeMute, masterBool, "Master Mute");
 			
 			
 			
 			//Sound Volume slider and toggle
-			sound = GUI.HorizontalSlider(new Rect(Screen.width * .5f, Screen.height * .49f, Screen.width * .4f, Screen.height * .04f), sound, 0f, 1f);
+			sound = GUI.HorizontalSlider(soundVolume, sound, 0f, 1f);
 			//apply Sound sldier to volume, modified by the master volume.
 			AudioListener.volume = sound * master;
 			//Then, display it as a percent of the slider alone
 			string soundString = (int)(sound * 100) + "%";
-			GUI.Label(new Rect(Screen.width * .9f, Screen.height * .49f, Screen.width * .1f, Screen.height * .5f), soundString);
+			GUI.Label(soundVolumeDisplay, soundString);
 			//mute sound button, applied in conjunction with the master mute
-			soundBool = GUI.Toggle(new Rect(Screen.width * .7f, Screen.height * .54f, Screen.width * .2f, Screen.height * .05f), soundBool, "Sound Mute");
+			soundBool = GUI.Toggle(soundVolumeMute, soundBool, "Sound Mute");
 			AudioListener.pause = soundBool || masterBool;
 			
 			
 			//Music Volume slider and toggle
-			music = GUI.HorizontalSlider(new Rect(Screen.width * .5f, Screen.height * .59f, Screen.width * .4f, Screen.height * .04f), music, 0f, 1f);
+			music = GUI.HorizontalSlider(musicVolume, music, 0f, 1f);
 			//apply Music volume to the music source, modified by master Volume. 
 			mainCameraObj.GetComponent<AudioSource>().volume = music * master;
 			//Then display it as a percent of the slider alone
@@ -120,8 +145,8 @@ public class OptionsMenu : MonoBehaviour {
 			mainCameraObj.GetComponent<AudioSource>().mute = musicBool || masterBool;
 
 			//Back to Main Menu button
-			if (GUI.Button(new Rect(Screen.width * .1f, Screen.height * .85f, Screen.width * .2f, Screen.height * .05f), "Back to Menu")){
-				GameObject optionsCamObj = GameObject.Find("Options Camera");
+			if (GUI.Button(returnToMainMenu, "Back to Menu")){
+				GameObject optionsCamObj = GameObject.Find("Options Object");
 				optionsCamObj.SetActive(false);
 			}
 

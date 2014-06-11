@@ -5,6 +5,12 @@ public class MainMenu : MonoBehaviour {
 
 	public GameObject optionsCamObj;
 	public GameObject playerShipObj;
+	private Rect continueGame;
+	private Rect newGame;
+	private Rect loadGame;
+	private Rect options;
+	private Rect about;
+	private Rect quit;
 	
 	void awake(){
 		optionsCamObj.SetActive(false);
@@ -16,7 +22,12 @@ public class MainMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		continueGame = new Rect(Screen.width * .75f, Screen.height * .05f, Screen.width * .2f, Screen.height * .07f);
+		newGame = new Rect(Screen.width * .75f, Screen.height * .16f, Screen.width * .2f, Screen.height * .07f);
+		loadGame = new Rect(Screen.width * .75f, Screen.height * .27f, Screen.width * .2f, Screen.height * .07f);
+		options = new Rect(Screen.width * .75f, Screen.height * .38f, Screen.width * .2f, Screen.height * .07f);
+		about = new Rect(Screen.width * .75f, Screen.height * .49f, Screen.width * .2f, Screen.height * .07f);
+		quit = new Rect(Screen.width * .75f, Screen.height * .6f, Screen.width * .2f, Screen.height * .07f);
 	}
 		
 	void OnGUI(){
@@ -29,11 +40,11 @@ public class MainMenu : MonoBehaviour {
 		 * 
 		 * */
 		//if (!options){
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .05f, Screen.width * .2f, Screen.height * .07f), "Continue game")){
+		if(GUI.Button(continueGame, "Continue game")){
 			Debug.Log("Continue");
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .16f, Screen.width * .2f, Screen.height * .07f), "New game")){
-			Debug.Log("New game");
+		if(GUI.Button(newGame, "New game")){
+			Debug.Log("New game ");
 			// Instant swap to player camera For testing player movement
 			playerShipObj.SetActive(true);
 			optionsCamObj.SetActive (false);
@@ -42,20 +53,20 @@ public class MainMenu : MonoBehaviour {
 			Debug.Log ("Done");
 			
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .27f, Screen.width * .2f, Screen.height * .07f), "Load game")){
+		if(GUI.Button(loadGame, "Load game")){
 			Debug.Log("Load game");
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .38f, Screen.width * .2f, Screen.height * .07f), "Options")){
+		if(GUI.Button(options, "Options")){
 			Debug.Log("Options");
 			//optionsCamObj = GameObject.Find("Options Camera");
 			optionsCamObj.SetActive(!optionsCamObj.activeSelf);
 			//optionsCam.GetComponent<Camera>().enabled = true;
 			//options = !options;
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .49f, Screen.width * .2f, Screen.height * .07f), "About us")){
+		if(GUI.Button(about, "About us")){
 			Debug.Log("About us");
 		}
-		if(GUI.Button(new Rect(Screen.width * .75f, Screen.height * .6f, Screen.width * .2f, Screen.height * .07f), "Exit game")){
+		if(GUI.Button(quit, "Exit game")){
 			Debug.Log("exit");
 			Application.Quit();
 		}
