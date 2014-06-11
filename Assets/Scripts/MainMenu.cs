@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour {
 	private Rect options;
 	private Rect about;
 	private Rect quit;
-	
+
 	void awake(){
 		optionsCamObj.SetActive(false);
 		playerShipObj.SetActive(false);
@@ -92,6 +92,13 @@ public class MainMenu : MonoBehaviour {
 			
 			
 		//}
+	}
+
+	private Rect GenerateNextLeftAlignedRectangle() {
+		return new Rect(leftAlign,
+		                topAlign + (buttonNo++ * buttonVerticalOffset),
+		                buttonWidth,
+		                buttonHeight);
 	}
 	
 
