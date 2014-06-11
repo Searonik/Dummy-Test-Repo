@@ -94,12 +94,6 @@ public class MainMenu : MonoBehaviour {
 		//}
 	}
 
-	private Rect GenerateNextLeftAlignedRectangle() {
-		return new Rect(leftAlign,
-		                topAlign + (buttonNo++ * buttonVerticalOffset),
-		                buttonWidth,
-		                buttonHeight);
-	}
-	
+
 
 }
