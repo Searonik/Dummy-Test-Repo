@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: af04f30219edc974aac5a1660c00c1e5
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mainCameraObj: {instanceID: 0}
+  - CannonBall: {instanceID: 0}
+  - WheelTexture: {fileID: 2800000, guid: 8f0c1ef4901981e4e8c57ec7547f58df, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

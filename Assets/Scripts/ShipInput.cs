@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ShipInput : MonoBehaviour {
@@ -6,6 +6,7 @@ public class ShipInput : MonoBehaviour {
 
 	public GameObject mainCameraObj;
 	public Rigidbody CannonBall;
+	public GameObject WheelPosition;
 	Transform FireFrom;
 	private float reload = 2f;
 
@@ -20,6 +21,9 @@ public class ShipInput : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Set the position or the Ship's Wheel display
+		WheelPosition.transform.localEulerAngles = new Vector3(0,0,Input.GetAxis("Rudder") * -180f);
+
 		// Makes the ship turn based on the "Rudder" Axis
 		transform.Rotate(Vector3.up * Input.GetAxis("Rudder"));
 
@@ -50,5 +54,9 @@ public class ShipInput : MonoBehaviour {
 			SendMessageUpwards("takeDamage", incoming);
 			Destroy(incoming.gameObject);
 		}
+	}
+
+	void onGUI(){
+
 	}
 }
